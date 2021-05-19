@@ -28,6 +28,52 @@
   color: #61dafb;
 }
 
+.card {
+  height: 20rem;
+   width: 15rem;
+   border-radius: 1rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
+  }
+  
+  .red {
+    background-color: red;
+    backface-visibility: hidden;
+  }
+  
+  .green {
+    background-color: greenyellow;
+    backface-visibility: hidden;
+  }
+  
+  .is-flipped {
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    transition: all 1s ease;
+  }
+  
+  .card-flipping-forward {
+    transform-style: preserve-3d;
+    animation: card-flip-fw 0.5s linear;
+  }
+  
+  .card-flipping-backward {
+    transform-style: preserve-3d;
+    animation: card-flip-bw 0.5s linear;
+  }
+  
+  @keyframes card-flip-fw {
+    from {}
+    to{transform:rotateY(180deg)}
+  }
+  
+  @keyframes card-flip-bw {
+    from {}
+    to{transform:rotateY(-180deg)}
+  }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
