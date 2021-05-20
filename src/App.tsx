@@ -5,11 +5,13 @@ import { ThemeProvider } from '@material-ui/styles';
 import './App.css';
 import { theme } from './themes/theme';
 import Game from './Game';
+import Timer from './Timer';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
+      <Timer/>
       <Container>
         <Game/>
       </Container>

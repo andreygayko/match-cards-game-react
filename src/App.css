@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.timer {
+  color: lawngreen; 
+  font-weight: 1200;
+}
+
 .card {
   height: 20rem;
    width: 15rem;

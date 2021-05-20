@@ -7,7 +7,6 @@ const Game = () => {
     
   const [flipFwId, setFlipFwId] = useState(-1);
   const [flipBwId, setFlipBwId] = useState([-1]);
-  const [front, setFront] = useState('front');
   const arr = [{id: 'A', related: 'a'}, {id: 'c', related: 'C'}, {id: 'b', related: 'B'}, {id: 'B', related: 'b'}, {id: 'C', related: 'c'}, {id: 'a', related: 'A'}];
   const [content, setContent] = useState(arr.map(() => ''));
   const [openedCard, setOpenedCard] = useState(-1);
