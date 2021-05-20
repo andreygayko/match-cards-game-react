@@ -1,15 +1,17 @@
-import { Typography } from "@material-ui/core"
 import { useState } from "react";
+import { Typography } from "@material-ui/core"
 
-import './App.css';
+import { useStyles } from './themes/theme';
 
 const Timer = () => {
+
+  const classes = useStyles();
 
   const [start] = useState(toSeconds(new Date()));
   const [time, setTime] = useState('00:00:00');
   
   setInterval(() => {
-    const now  = new Date();
+    const now = new Date();
     setTime(secondsToString(toSeconds(now) - start));
   }, 1000);
 
@@ -23,7 +25,7 @@ const Timer = () => {
 
   return (
     <>
-      <Typography className='timer' variant='h5'>{time}</Typography>
+      <Typography className={classes.timer} variant='h5'>{time}</Typography>
     </>
   )
 }

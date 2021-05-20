@@ -36,5 +36,17 @@ export const useStyles = makeStyles((theme) => ({
   inputField: {
     margin: '1rem auto 0',
     width: '80%',
-  }
+  },
+  authForm: {
+    margin: '10% auto',
+    width: '30%',
+    minWidth: '20rem',  
+    background: 'white',
+    borderRadius: '1rem',
+    boxShadow: '0 0 .5rem gray',
+  },
+  timer: {
+    color: '#7cfc00',
+    fontWeight: 1200,
+  },
 }))

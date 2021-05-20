@@ -22,7 +22,7 @@ const User = (props: PropTypes) => {
   }
 
   return (
-    <div className='auth-form'>
+    <div className={classes.authForm}>
       <Grid container direction='column'>
         <Typography className={classes.m1}>Enter your name, please. We shoul be able to add you to the leaderbord. Wish you lots of success!</Typography>
         <TextField className={classes.inputField} variant='outlined' placeholder='username' value={name} onChange={(event) => setName(event.target.value)}/>
