@@ -11,8 +11,6 @@ const Timer = () => {
   setInterval(() => {
     const now  = new Date();
     setTime(secondsToString(toSeconds(now) - start));
-    
-    //setTime(`${hours}:${minutes}:${seconds}`);
   }, 1000);
 
   function toSeconds(time: Date) {

@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+.auth-form {
+  margin: 10% auto;
+  width: 30%;
+  min-width: 20rem;  
+  background: white;
+  border: 1px solid gray;
+  box-shadow: 0 0 .5rem gray;
+}
+
+.input-field {
+  width: 80%; 
+  margin: 0 auto; 
+  margin-top: 1rem;
+}
+
 .timer {
   color: lawngreen; 
   font-weight: 1200;
