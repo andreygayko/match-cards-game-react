@@ -33,6 +33,31 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '1rem',
     marginBottom: '1rem',
   },
+  mg1: {
+    marginRight: '1rem',
+    marginLeft: '1rem',
+  },
+  mr1: {
+    marginRight: '1rem',
+  },
+  textCenter: {
+    textAlign:'center',
+  },
+  textRight: {
+    textAlign:'right',
+  },
+  textLeft: {
+    textAlign:'left',
+  },
+  fullWidth: {
+    width: '100%',
+  },
+  select: {
+    height:'2rem',
+    borderColor:'#bebebe', 
+    borderRadius: '.2rem', 
+    marginLeft: '.2rem'
+  },
   inputField: {
     margin: '1rem auto 0',
     width: '80%',

@@ -8,6 +8,7 @@ import Game from './Game';
 import Timer from './Timer';
 import User from './User';
 import LeaderBoard from './LeaderBoard';
+import Menu from './Menu/Menu';
 
 function App() {
   
@@ -35,6 +36,8 @@ function App() {
       {
         name && email && !userDialog ?
         <>
+         <Menu 
+            username={name}/>
           <Timer/>
           <Container>
             <Game/>
