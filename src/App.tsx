@@ -7,6 +7,7 @@ import { theme } from './themes/theme';
 import Game from './Game';
 import Timer from './Timer';
 import User from './User';
+import LeaderBoard from './LeaderBoard';
 
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
           <Timer/>
           <Container>
             <Game/>
+            <LeaderBoard/>
           </Container>
         </> :
           <User handleClose={handleDialogClose}/>
