@@ -5,6 +5,7 @@ import { useStyles } from '../themes/theme';
 interface PropTypes {
   username: string;
   handleDialog: () => void;
+  openLeaderboard: () => void;
 }
 
 const Menu = (props: PropTypes) => {
@@ -46,7 +47,7 @@ const Menu = (props: PropTypes) => {
         </Grid>
       </Grid>
       
-      <Button className={classes.mg1} variant='outlined'>Leaderboard</Button>
+      <Button className={classes.mg1} variant='outlined' onClick={() => props.openLeaderboard()} >Leaderboard</Button>
       <Button className={classes.m1} variant='outlined' onClick={handleExit}>Exit</Button>
     </Grid>
   )

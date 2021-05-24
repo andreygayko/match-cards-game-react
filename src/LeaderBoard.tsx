@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel } from "@material-ui/core";
+import { Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel } from "@material-ui/core";
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { ArrowBackIos } from '@material-ui/icons';
 import clsx from 'clsx';
+
+import { useStyles } from "./themes/theme";
 
 type Order = 'asc'|'desc';
 type CellType = 'name'|'time'|'steps';
 interface HeadCell {
   id: CellType;
   label: string;
+};
+
+interface PropTypes {
+  closeLeaderboard: () => void;
 }
 
 const StyledTableSortLabel = makeStyles((theme) =>
@@ -35,9 +42,10 @@ const records = [
     { name: '555', time: '00:00:50', steps: '15' },
   ];
 
-const LeaderBoard = () => {
+const LeaderBoard = (props: PropTypes) => {
 
-const classes = StyledTableSortLabel();
+const classesLB = StyledTableSortLabel();
+const classes = useStyles();
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<CellType>('name');
@@ -69,34 +77,38 @@ const classes = StyledTableSortLabel();
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {headCells.map(cell => (
-            <TableCell>
-              <TableSortLabel
-                className={clsx(classes.root, classes.active, classes.icon)}
-                active={orderBy === cell.id}
-                direction={order}
-                onClick={() => handleRequestSort(cell.id)}>
-                  {cell.label}
-              </TableSortLabel>
-            </TableCell>))}
-          </TableRow>
-        </TableHead>
+    <Container>
+      <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={() => props.closeLeaderboard()}>Back</Button>
 
-        <TableBody>
-          {recordSort(orderBy, order).map((record, i) => (
-            <TableRow hover>
-              <TableCell>{record.name}</TableCell>
-              <TableCell>{record.time}</TableCell>
-              <TableCell>{record.steps}</TableCell>  
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {headCells.map(cell => (
+              <TableCell>
+                <TableSortLabel
+                  className={clsx(classesLB.root, classesLB.active, classesLB.icon)}
+                  active={orderBy === cell.id}
+                  direction={order}
+                  onClick={() => handleRequestSort(cell.id)}>
+                    {cell.label}
+                </TableSortLabel>
+              </TableCell>))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+
+          <TableBody>
+            {recordSort(orderBy, order).map((record, i) => (
+              <TableRow hover>
+                <TableCell>{record.name}</TableCell>
+                <TableCell>{record.time}</TableCell>
+                <TableCell>{record.steps}</TableCell>  
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
   );
 };
 
