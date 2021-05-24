@@ -6,6 +6,7 @@ interface PropTypes {
   username: string;
   handleDialog: () => void;
   openLeaderboard: () => void;
+  startGame:() => void;
 }
 
 const Menu = (props: PropTypes) => {
@@ -32,7 +33,7 @@ const Menu = (props: PropTypes) => {
       <Grid className={classes.m1} item>
         <Grid container alignItems='center'>
           <Grid className={[classes.mr1, classes.textCenter].join(' ')} item xs={8}>
-              <Button variant='outlined' className={classes.fullWidth}>Start</Button>
+              <Button variant='outlined' className={classes.fullWidth} onClick={() => props.startGame()}>Start</Button>
           </Grid>
           <Grid item xs={2} className={classes.textRight}>
             <Tooltip title='Select a number of cards you will have on the table' placement='left-end'>

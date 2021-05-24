@@ -16,6 +16,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [userDialog, setUserDialog] = useState(true);
   const [isLeaderboard, setIsLeaderboard] = useState(false);
+  const [isGame, setIsGame] = useState(false);
 
   useEffect(() => {
     const userName = sessionStorage.getItem('userName');
@@ -35,6 +36,10 @@ function App() {
     setIsLeaderboard(prev => !prev);
   };
 
+  const toggleGame = () => {
+    setIsGame(prev => !prev);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
@@ -42,17 +47,24 @@ function App() {
         name && email && !userDialog ?
         <>
           {isLeaderboard ? 
+          
             <LeaderBoard
               closeLeaderboard={toggleLeaderboard}/> : 
-            <Menu 
-              username={name}
-              handleDialog={toggleDialog}
-              openLeaderboard={toggleLeaderboard}/>
+
+              isGame ? 
+                <Container>
+                  <Timer/>
+                  <Game
+                    exitGame={toggleGame}/>
+                </Container> :
+
+                <Menu 
+                  username={name}
+                  handleDialog={toggleDialog}
+                  openLeaderboard={toggleLeaderboard}
+                  startGame={toggleGame}/>
           }
-          <Timer/>
-          <Container>
-            <Game/>
-          </Container>
+          
         </> :
           <User handleClose={toggleDialog}/>
       }

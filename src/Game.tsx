@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Grid, ListItem, Typography } from "@material-ui/core";
+import { Button, Grid, ListItem, Typography } from "@material-ui/core";
 
 import './App.css';
+import { useStyles } from "./themes/theme";
+import { ArrowBackIos } from "@material-ui/icons";
 
-const Game = () => {
+interface PropTypes {
+  exitGame: () => void;
+}
+
+const Game = (props: PropTypes) => {
+
+  const classes = useStyles();
     
   const [flipFwId, setFlipFwId] = useState(-1);
   const [flipBwId, setFlipBwId] = useState([-1]);
@@ -51,6 +59,8 @@ const Game = () => {
   }  
   console.log(flipBwId);
   return (
+    <>
+    <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={() => props.exitGame()}>Back</Button>
     <Grid container direction='row' onClick={(event) => handleFlip(event)}>
       {arr.map((el, i) => 
         <Grid item xs={2}>
@@ -66,6 +76,7 @@ const Game = () => {
         </Grid>)
       }
     </Grid> 
+  </>
   )
 }
 
