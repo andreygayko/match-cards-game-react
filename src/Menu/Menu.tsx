@@ -4,11 +4,18 @@ import { useStyles } from '../themes/theme';
 
 interface PropTypes {
   username: string;
+  handleDialog: () => void;
 }
 
 const Menu = (props: PropTypes) => {
 
   const classes = useStyles();
+
+  const handleExit = () => {
+    sessionStorage.removeItem('userName');
+    sessionStorage.removeItem('userEmail');
+    props.handleDialog();
+  };
 
   function generateArray(start: number, end: number) {
     const arr = [];
@@ -40,7 +47,7 @@ const Menu = (props: PropTypes) => {
       </Grid>
       
       <Button className={classes.mg1} variant='outlined'>Leaderboard</Button>
-      <Button className={classes.m1} variant='outlined'>Exit</Button>
+      <Button className={classes.m1} variant='outlined' onClick={handleExit}>Exit</Button>
     </Grid>
   )
 };

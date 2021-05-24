@@ -26,8 +26,8 @@ function App() {
     }
   }, [userDialog]);
 
-  const handleDialogClose = () => {
-    setUserDialog(false);
+  const toggleDialog = () => {
+    setUserDialog(prev => !prev);
   };
 
   return (
@@ -36,15 +36,16 @@ function App() {
       {
         name && email && !userDialog ?
         <>
-         <Menu 
-            username={name}/>
+          <Menu 
+            username={name}
+            handleDialog={toggleDialog}/>
           <Timer/>
           <Container>
             <Game/>
-            <LeaderBoard/>
+          <LeaderBoard/>
           </Container>
         </> :
-          <User handleClose={handleDialogClose}/>
+          <User handleClose={toggleDialog}/>
       }
     </ThemeProvider>
   );
