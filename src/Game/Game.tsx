@@ -4,23 +4,27 @@ import { ArrowBackIos } from "@material-ui/icons";
 
 import CardsTable from "./CardsTable";
 import Timer from './Timer';
+import { getCards } from './cardData';
 import { useStyles } from "../themes/theme";
 
 
 interface PropTypes {
+  cardsQty: number;
   exitGame: () => void;
 }
 
 const Game = (props: PropTypes) => {
 
-  const classes = useStyles();
+  const classes = useStyles(); 
+
+  const cards = getCards(props.cardsQty);
 
   return (
     <>
       <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={() => props.exitGame()}>Back</Button>
       <Grid container direction='row'>
         <Timer />
-        <CardsTable />
+        <CardsTable cards={cards}/>
       </Grid>
       
 

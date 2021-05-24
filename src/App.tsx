@@ -54,6 +54,7 @@ function App() {
                 <Container>
                   
                   <Game
+                    cardsQty={12}
                     exitGame={toggleGame}/>
                 </Container> :
 

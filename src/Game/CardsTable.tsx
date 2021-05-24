@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Button, Grid, ListItem, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid, ListItem, Typography } from "@material-ui/core";
 
+import { Card } from './types';
 import '../App.css';
 
-const CardsTable = () => {
+interface PropTypes {
+  cards: Card[];
+}
+
+const CardsTable = (props: PropTypes) => {
     
+  const { cards } = props;
   const [flipFwId, setFlipFwId] = useState(-1);
   const [flipBwId, setFlipBwId] = useState([-1]);
-  const arr = [{id: 'A', related: 'a'}, {id: 'c', related: 'C'}, {id: 'b', related: 'B'}, {id: 'B', related: 'b'}, {id: 'C', related: 'c'}, {id: 'a', related: 'A'}];
-  const [content, setContent] = useState(arr.map(() => ''));
+  const [content, setContent] = useState(cards.map(() => ''));
   const [openedCard, setOpenedCard] = useState(-1);
   const [guessed, setGuessed] = useState([-1]);
     
   const check = (id: number) => {
     if (openedCard >= 0 && openedCard !== id) {
-      if (arr[openedCard].related === arr[id].id) {
+      if (cards[openedCard].related === cards[id].id) {
        let guess = [...guessed];
        guess.length === 1 ? guess = [openedCard, id] : guess.push(openedCard, id)
        setGuessed(guess);
@@ -29,8 +34,6 @@ const CardsTable = () => {
         setContent(cont);
       }, 1000)
       
-      console.log('back');
-      
     }
     } else {
       setOpenedCard(id);
@@ -42,17 +45,17 @@ const CardsTable = () => {
     if (id && parseInt(id) !== flipFwId && !guessed.includes(parseInt(id))) {
       const numId = parseInt(id);
       const cont = [...content];
-      cont[numId] = arr[numId].id;
+      cont[numId] = cards[numId].id;
       setFlipBwId([-1]);
       setContent(cont);
       setFlipFwId(numId);
       check(numId);
     }
   }  
-  console.log(flipBwId);
+
   return (
     <Grid container direction='row' onClick={(event) => handleFlip(event)}>
-      {arr.map((el, i) => 
+      {cards.map((el, i) => 
         <Grid item xs={2}>
           <ListItem>
             <div className={`${flipBwId.includes(i) ? 'card-flipping-backward' : (flipFwId === i ? 'card-flipping-forward': '')} card`} id={i.toString()}>
