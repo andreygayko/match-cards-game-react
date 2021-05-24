@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Typography } from "@material-ui/core"
 
-import { useStyles } from './themes/theme';
+import { useStyles } from '../themes/theme';
 
 const Timer = () => {
 

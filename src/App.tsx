@@ -4,8 +4,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import './App.css';
 import { theme } from './themes/theme';
-import Game from './Game';
-import Timer from './Timer';
+import Game from './Game/Game';
 import User from './User';
 import LeaderBoard from './LeaderBoard';
 import Menu from './Menu/Menu';
@@ -47,13 +46,13 @@ function App() {
         name && email && !userDialog ?
         <>
           {isLeaderboard ? 
-          
+
             <LeaderBoard
               closeLeaderboard={toggleLeaderboard}/> : 
 
               isGame ? 
                 <Container>
-                  <Timer/>
+                  
                   <Game
                     exitGame={toggleGame}/>
                 </Container> :
@@ -63,8 +62,7 @@ function App() {
                   handleDialog={toggleDialog}
                   openLeaderboard={toggleLeaderboard}
                   startGame={toggleGame}/>
-          }
-          
+          }         
         </> :
           <User handleClose={toggleDialog}/>
       }

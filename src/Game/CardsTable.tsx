@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Grid, ListItem, Typography } from "@material-ui/core";
 
-import './App.css';
-import { useStyles } from "./themes/theme";
-import { ArrowBackIos } from "@material-ui/icons";
+import '../App.css';
 
-interface PropTypes {
-  exitGame: () => void;
-}
-
-const Game = (props: PropTypes) => {
-
-  const classes = useStyles();
+const CardsTable = () => {
     
   const [flipFwId, setFlipFwId] = useState(-1);
   const [flipBwId, setFlipBwId] = useState([-1]);
@@ -59,8 +51,6 @@ const Game = (props: PropTypes) => {
   }  
   console.log(flipBwId);
   return (
-    <>
-    <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={() => props.exitGame()}>Back</Button>
     <Grid container direction='row' onClick={(event) => handleFlip(event)}>
       {arr.map((el, i) => 
         <Grid item xs={2}>
@@ -76,8 +66,7 @@ const Game = (props: PropTypes) => {
         </Grid>)
       }
     </Grid> 
-  </>
   )
 }
 
-export default Game;
+export default CardsTable;
