@@ -1,4 +1,5 @@
 import { Button, Grid, Tooltip, Typography } from "@material-ui/core";
+import { useState } from "react";
 
 import { useStyles } from '../themes/theme';
 
@@ -6,17 +7,22 @@ interface PropTypes {
   username: string;
   handleDialog: () => void;
   openLeaderboard: () => void;
-  startGame:() => void;
+  startGame:(difficulty: number) => void;
 }
 
 const Menu = (props: PropTypes) => {
 
   const classes = useStyles();
+  const [difficulty, setDifficulty] = useState(0);
 
   const handleExit = () => {
     sessionStorage.removeItem('userName');
     sessionStorage.removeItem('userEmail');
     props.handleDialog();
+  };
+
+  const handleStart = () => {
+    difficulty > 0 && props.startGame(difficulty)
   };
 
   function generateArray(start: number, end: number) {
@@ -33,7 +39,7 @@ const Menu = (props: PropTypes) => {
       <Grid className={classes.m1} item>
         <Grid container alignItems='center'>
           <Grid className={[classes.mr1, classes.textCenter].join(' ')} item xs={8}>
-              <Button variant='outlined' className={classes.fullWidth} onClick={() => props.startGame()}>Start</Button>
+              <Button variant='outlined' className={classes.fullWidth} onClick={handleStart}>Start</Button>
           </Grid>
           <Grid item xs={2} className={classes.textRight}>
             <Tooltip title='Select a number of cards you will have on the table' placement='left-end'>
@@ -41,7 +47,7 @@ const Menu = (props: PropTypes) => {
             </Tooltip>  
           </Grid>
           <Grid item xs={1} className={classes.textLeft}>
-             <select className={classes.select}>
+             <select className={classes.select} onChange={(event) => setDifficulty(parseInt(event.target.value))}>
                {generateArray(8, 16).map(el => <option value={el}>{el}</option>)}
              </select>
           </Grid>

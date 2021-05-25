@@ -16,6 +16,7 @@ function App() {
   const [userDialog, setUserDialog] = useState(true);
   const [isLeaderboard, setIsLeaderboard] = useState(false);
   const [isGame, setIsGame] = useState(false);
+  const [difficulty, setDifficulty] = useState(0);
 
   useEffect(() => {
     const userName = sessionStorage.getItem('userName');
@@ -39,6 +40,11 @@ function App() {
     setIsGame(prev => !prev);
   };
 
+  const handleStartGame = (cardsQty: number) => {
+    setDifficulty(cardsQty);
+    toggleGame();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
@@ -52,9 +58,8 @@ function App() {
 
               isGame ? 
                 <Container>
-                  
                   <Game
-                    cardsQty={12}
+                    cardsQty={difficulty}
                     exitGame={toggleGame}/>
                 </Container> :
 
@@ -62,7 +67,7 @@ function App() {
                   username={name}
                   handleDialog={toggleDialog}
                   openLeaderboard={toggleLeaderboard}
-                  startGame={toggleGame}/>
+                  startGame={handleStartGame}/>
           }         
         </> :
           <User handleClose={toggleDialog}/>

@@ -26,8 +26,6 @@ const Game = (props: PropTypes) => {
         <Timer />
         <CardsTable cards={cards}/>
       </Grid>
-      
-
     </>
   );
 };
