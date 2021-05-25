@@ -74,4 +74,11 @@ export const useStyles = makeStyles((theme) => ({
     color: '#7cfc00',
     fontWeight: 1200,
   },
+  gameBlock: {
+    width: '100%', 
+    height: '5rem', 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center',
+  }
 }))

@@ -23,16 +23,15 @@ const Game = (props: PropTypes) => {
   return (
     <>
       <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={() => props.exitGame()}>Back</Button>
-      <Grid style={{maxWidth:'10000'}} container direction='row'>
+      <Grid container direction='row'>
         <Grid item xs={1}>
-            <Paper style={{width: '100%', height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><Timer /></Paper>
-          
+          <Paper className={classes.gameBlock}><Timer /></Paper>         
         </Grid>
         <Grid item xs={10}>
           <CardsTable cards={cards} increaseCounter={() => setCounter(prev => ++prev)}/>
         </Grid>
         <Grid item xs={1}>
-        <Paper style={{width: '100%', height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><ClickCounter count={counter}/></Paper>
+          <Paper className={classes.gameBlock}><ClickCounter count={counter}/></Paper>
         </Grid>
       </Grid>
     </>
