@@ -44,7 +44,7 @@ const Menu = (props: PropTypes) => {
           </Grid>
           <Grid item xs={1} className={classes.textLeft}>
              <select className={classes.select} onChange={(event) => setDifficulty(parseInt(event.target.value))}>
-               {generateArray(8, 16).map(el => <option value={el}>{el}</option>)}
+               {generateArray(8, 16).map((el, i) => <option key={i} value={el}>{el}</option>)}
              </select>
           </Grid>
         </Grid>
