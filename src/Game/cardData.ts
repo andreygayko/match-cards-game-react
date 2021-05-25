@@ -11,6 +11,10 @@ const cards = [
   {id: 'e', related: 'E'},
   {id: 'F', related: 'f'},
   {id: 'f', related: 'F'},
+  {id: 'G', related: 'g'},
+  {id: 'g', related: 'G'},
+  {id: 'H', related: 'h'},
+  {id: 'h', related: 'H'},
 ];
 
 export const getCards = (qty: number) => {

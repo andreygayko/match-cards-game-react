@@ -57,7 +57,7 @@ const CardsTable = (props: PropTypes) => {
     <Grid container direction='row' onClick={(event) => handleFlip(event)}>
       {cards.map((el, i) => 
         <Grid item xs={2}>
-          <ListItem>
+          <ListItem key={i}>
             <div className={`${flipBwId.includes(i) ? 'card-flipping-backward' : (flipFwId === i ? 'card-flipping-forward': '')} card`} id={i.toString()}>
               {
                 content[i] ? 
