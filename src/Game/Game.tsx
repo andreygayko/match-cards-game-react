@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Grid } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
 
@@ -16,8 +16,8 @@ interface PropTypes {
 const Game = (props: PropTypes) => {
 
   const classes = useStyles(); 
-
-  const cards = getCards(props.cardsQty);
+  const [counter, setCounter] = useState(0);
+  const [cards] = useState(getCards(props.cardsQty));
 
   return (
     <>

@@ -50,7 +50,7 @@ const CardsTable = (props: PropTypes) => {
       setContent(cont);
       setFlipFwId(numId);
       check(numId);
-    }
+    };
   }  
 
   return (
