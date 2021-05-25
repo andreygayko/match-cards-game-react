@@ -13,16 +13,12 @@ interface PropTypes {
 const Menu = (props: PropTypes) => {
 
   const classes = useStyles();
-  const [difficulty, setDifficulty] = useState(0);
+  const [difficulty, setDifficulty] = useState(8);
 
   const handleExit = () => {
     sessionStorage.removeItem('userName');
     sessionStorage.removeItem('userEmail');
     props.handleDialog();
-  };
-
-  const handleStart = () => {
-    difficulty > 0 && props.startGame(difficulty)
   };
 
   function generateArray(start: number, end: number) {
@@ -39,7 +35,7 @@ const Menu = (props: PropTypes) => {
       <Grid className={classes.m1} item>
         <Grid container alignItems='center'>
           <Grid className={[classes.mr1, classes.textCenter].join(' ')} item xs={8}>
-              <Button variant='outlined' className={classes.fullWidth} onClick={handleStart}>Start</Button>
+              <Button variant='outlined' className={classes.fullWidth} onClick={() => props.startGame(difficulty)}>Start</Button>
           </Grid>
           <Grid item xs={2} className={classes.textRight}>
             <Tooltip title='Select a number of cards you will have on the table' placement='left-end'>
