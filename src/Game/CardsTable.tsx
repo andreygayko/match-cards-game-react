@@ -7,16 +7,19 @@ import '../App.css';
 interface PropTypes {
   cards: Card[];
   increaseCounter: () => void;
+  stopTimer: () => void;
 }
 
 const CardsTable = (props: PropTypes) => {
     
-  const { cards, increaseCounter } = props;
+  const { cards, increaseCounter, stopTimer } = props;
   const [flipFwId, setFlipFwId] = useState(-1);
   const [flipBwId, setFlipBwId] = useState([-1]);
   const [content, setContent] = useState(cards.map(() => ''));
   const [openedCard, setOpenedCard] = useState(-1);
   const [guessed, setGuessed] = useState([-1]);
+
+  guessed.length === cards.length && stopTimer();  
     
   const check = (id: number) => {
     if (openedCard >= 0 && openedCard !== id) {

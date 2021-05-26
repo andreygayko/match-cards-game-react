@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Typography } from "@material-ui/core"
 
 import { useStyles } from '../themes/theme';
 
-const Timer = () => {
+interface PropTypes {
+  stop: boolean;
+}
+
+const Timer = (props: PropTypes) => {
 
   const classes = useStyles();
 
   const [start] = useState(toSeconds(new Date()));
   const [time, setTime] = useState('00:00:00');
+  const [final, setFinal] = useState('');
   
-  setInterval(() => {
-    const now = new Date();
-    setTime(secondsToString(toSeconds(now) - start));
-  }, 1000);
-
+  useEffect(() => {
+    setInterval(() => {
+      const now = new Date();
+      setTime(secondsToString(toSeconds(now) - start));
+    }, 1000);
+    props.stop && setFinal(time);
+  }, [props.stop]);
+    
   function toSeconds(time: Date) {
     return time.getHours() * 60 * 60 + time.getMinutes() * 60 + time.getSeconds();
   };
@@ -28,7 +36,7 @@ const Timer = () => {
 
   return (
     <>
-      <Typography className={classes.timer} variant='h5'>{time}</Typography>
+      <Typography className={classes.timer} variant='h5'>{final ? final : time}</Typography>
     </>
   )
 }
