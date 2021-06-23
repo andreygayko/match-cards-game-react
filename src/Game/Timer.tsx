@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
 import { Typography } from "@material-ui/core"
 
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useActions } from '../hooks/useActions';
 import { useStyles } from '../themes/theme';
 
-interface PropTypes {
-  stop: boolean;
-}
-
-const Timer = (props: PropTypes) => {
+const Timer = () => {
 
   const classes = useStyles();
 
   const [start] = useState(toSeconds(new Date()));
-  const [time, setTime] = useState('00:00:00');
-  const [final, setFinal] = useState('');
+  const [currentTime, setCurrentTime] = useState('00:00:00');
+
+  const { time, isStop }  = useTypedSelector(state => state.gameProcess);
+  const { setTimer } = useActions();
+
   
   useEffect(() => {
     setInterval(() => {
       const now = new Date();
-      setTime(secondsToString(toSeconds(now) - start));
+      setCurrentTime(secondsToString(toSeconds(now) - start));
     }, 1000);
-    props.stop && setFinal(time);
-  }, [props.stop]);
+    isStop && setTimer(time);
+  }, [isStop]);
     
   function toSeconds(time: Date) {
     return time.getHours() * 60 * 60 + time.getMinutes() * 60 + time.getSeconds();
@@ -36,7 +37,7 @@ const Timer = (props: PropTypes) => {
 
   return (
     <>
-      <Typography className={classes.timer} variant='h5'>{final ? final : time}</Typography>
+      <Typography className={classes.timer} variant='h5'>{ isStop ? time : currentTime }</Typography>
     </>
   )
 }

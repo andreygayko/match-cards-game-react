@@ -4,6 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ArrowBackIos } from '@material-ui/icons';
 import clsx from 'clsx';
 
+import { useActions } from './hooks/useActions';
 import { useStyles } from "./themes/theme";
 
 type Order = 'asc'|'desc';
@@ -12,10 +13,6 @@ interface HeadCell {
   id: CellType;
   label: string;
 };
-
-interface PropTypes {
-  closeLeaderboard: () => void;
-}
 
 const StyledTableSortLabel = makeStyles((theme) =>
   createStyles({
@@ -42,13 +39,15 @@ const records = [
     { name: '555', time: '00:00:50', steps: '15' },
   ];
 
-const LeaderBoard = (props: PropTypes) => {
+const LeaderBoard = () => {
 
 const classesLB = StyledTableSortLabel();
 const classes = useStyles();
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<CellType>('name');
+
+  const { setMenu, setLeaderboard } = useActions();
 
   const headCells: HeadCell[] = [
     { id: 'name', label: 'Name' },
@@ -76,9 +75,14 @@ const classes = useStyles();
     return sortedValues.map(el => records[records.findIndex(rec => rec[key] === el)]);
   };
 
+  const handleLeaderboardClose = () => {
+    setMenu(true);
+    setLeaderboard(false);
+  };
+
   return (
     <Container>
-      <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={() => props.closeLeaderboard()}>Back</Button>
+      <Button className={classes.mv1} startIcon={<ArrowBackIos/>} variant='outlined' onClick={handleLeaderboardClose}>Back</Button>
 
       <TableContainer component={Paper}>
         <Table>

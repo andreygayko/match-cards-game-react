@@ -1,13 +1,12 @@
 import { Typography } from "@material-ui/core";
-
-interface PropTypes {
-    count: number;
-  };
+import { useTypedSelector } from '../hooks/useTypedSelector';
   
-  const ClickCounter = (props: PropTypes) => {
+  const ClickCounter = () => {
+
+    const counter = useTypedSelector(state => state.gameProcess.counter);
       
     return (
-      <Typography>Clicks: {props.count}</Typography>
+      <Typography>Clicks: {counter}</Typography>
     )
   };
   

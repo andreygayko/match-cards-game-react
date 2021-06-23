@@ -1,24 +1,24 @@
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { useState } from "react";
+
+import { useActions } from './hooks/useActions';
 import { useStyles } from './themes/theme';
 
-interface PropTypes {
-  handleClose: () => void; 
-}
-
-const User = (props: PropTypes) => {
+const User = () => {
 
   const classes = useStyles();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
+  const { setUser } = useActions();
+
   const handleSubmit = () => {
     if (name.trim() && email.trim()) {
       sessionStorage.setItem('userName', name);
       sessionStorage.setItem('userEmail', email);
+      setUser(name, email);
     };
-    props.handleClose();
   }
 
   return (

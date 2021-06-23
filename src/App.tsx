@@ -8,69 +8,43 @@ import Game from './Game/Game';
 import User from './User';
 import LeaderBoard from './LeaderBoard';
 import Menu from './Menu/Menu';
+import { useActions } from './hooks/useActions';
+import { useTypedSelector } from './hooks/useTypedSelector';
 
 function App() {
   
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [userDialog, setUserDialog] = useState(true);
-  const [isLeaderboard, setIsLeaderboard] = useState(false);
-  const [isGame, setIsGame] = useState(false);
   const [difficulty, setDifficulty] = useState(0);
 
+  const { setUser } = useActions();
+  const {userName, userEmail, isGame, isMenu, isLeaderboard} = useTypedSelector(store => store.gameProcess);
+
   useEffect(() => {
-    const userName = sessionStorage.getItem('userName');
-    const userEmail = sessionStorage.getItem('userEmail');
-    if (userName && userEmail) {
-      setName(userName);
-      setEmail(userEmail);
-      setUserDialog(false);
+    const name = sessionStorage.getItem('userName');
+    const email = sessionStorage.getItem('userEmail');
+    if (name && email) {
+      setUser(name, email);
     }
-  }, [userDialog]);
-
-  const toggleDialog = () => {
-    setUserDialog(prev => !prev);
-  };
-
-  const toggleLeaderboard = () => {
-    setIsLeaderboard(prev => !prev);
-  };
-
-  const toggleGame = () => {
-    setIsGame(prev => !prev);
-  };
-
-  const handleStartGame = (cardsQty: number) => {
-    setDifficulty(cardsQty);
-    toggleGame();
-  };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
       {
-        name && email && !userDialog ?
+        userName && userEmail ?
         <>
           {isLeaderboard ? 
 
-            <LeaderBoard
-              closeLeaderboard={toggleLeaderboard}/> : 
+            <LeaderBoard/> : 
 
               isGame ? 
                 <Container>
-                  <Game
-                    cardsQty={difficulty}
-                    exitGame={toggleGame}/>
+                  <Game/>
                 </Container> :
 
-                <Menu 
-                  username={name}
-                  handleDialog={toggleDialog}
-                  openLeaderboard={toggleLeaderboard}
-                  startGame={handleStartGame}/>
+                <Menu/>
           }         
         </> :
-          <User handleClose={toggleDialog}/>
+          <User/>
       }
     </ThemeProvider>
   );

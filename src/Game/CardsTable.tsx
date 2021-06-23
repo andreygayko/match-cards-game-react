@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { Grid, ListItem, Typography } from "@material-ui/core";
 
-import { Card } from './types';
+import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { getCards } from './cardData';
 import '../App.css';
 
-interface PropTypes {
-  cards: Card[];
-  increaseCounter: () => void;
-  stopTimer: () => void;
-}
+const CardsTable = () => {
 
-const CardsTable = (props: PropTypes) => {
-    
-  const { cards, increaseCounter, stopTimer } = props;
+  const { setCounter, setStop } = useActions();
+  const { difficulty, counter } = useTypedSelector(state => state.gameProcess);
+
+  const [cards] = useState(getCards(difficulty));
   const [flipFwId, setFlipFwId] = useState(-1);
   const [flipBwId, setFlipBwId] = useState([-1]);
   const [content, setContent] = useState(cards.map(() => ''));
   const [openedCard, setOpenedCard] = useState(-1);
   const [guessed, setGuessed] = useState([-1]);
 
-  guessed.length === cards.length && stopTimer();  
+  guessed.length === cards.length && setStop(true);  
+
+  const increaseCounter = () => {
+    setCounter(counter + 1);
+  };
     
   const check = (id: number) => {
     if (openedCard >= 0 && openedCard !== id) {
